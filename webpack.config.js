@@ -6,11 +6,12 @@ module.exports = {
   entry: "./src/js/app.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "bundle.[hash].js",
   },
   plugins: [
-    new MiniCssExtractPlugin({ name: "main.css" }),
+    new MiniCssExtractPlugin({ filename: "style.[hash].css" }),
     new HtmlWebpackPlugin({
+      hash: true,
       filename: "index.html",
       template: "public/index.html",
     }),
