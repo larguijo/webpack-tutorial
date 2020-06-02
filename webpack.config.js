@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   entry: "./src/js/app.js",
@@ -15,6 +16,7 @@ module.exports = {
       filename: "index.html",
       template: "public/index.html",
     }),
+    new OptimizeCssAssetsPlugin(),
   ],
   module: {
     rules: [
@@ -28,9 +30,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss|sass)$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
+  },
+  optimization: {
+    minimize: true,
   },
 };
